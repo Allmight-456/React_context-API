@@ -1,50 +1,43 @@
-import { BrowserRouter, Route, Routes, useNavigate } from "react-router-dom";
-import "./App.css";
-import { Suspense,lazy } from "react";
-const Dashboard = lazy(() => import("./components/Dashboard"));
-const Landing = lazy(() => import("./components/Landing"));
-
-//used supsense API for lazy loading and designated a fallback to "loading..."
-// for when the page is Loading
+import { useState } from "react";
 
 function App() {
+  const [count , setCount]= useState(0);
   return (
     <div>
-      <BrowserRouter>
-        <AppBar />
-        <Suspense fallback={"loading ..."}>
-          <Routes>
-            <Route path="/dashboard" Component={Dashboard} />
-            <Route path="/" Component={Landing} />
-          </Routes>
-        </Suspense>
-      </BrowserRouter>
+      <Count count={count} setCount={setCount}/>
+      
     </div>
   );
 }
 
-//we cannot use 'useNavigate' hook in any place except inside
-// {BrowserRouter} and thats how we solve the page reload
-function AppBar() {
-  const navigate = useNavigate();
-  return (
-    <div>
-      <button
-        onClick={() => {
-          navigate("/");
-        }}
-      >
-        Landing Page
-      </button>
-      <button
-        onClick={() => {
-          navigate("/dashboard");
-        }}
-      >
-        Dashboard
-      </button>
-    </div>
-  );
+//here the function count will not use the prop setcount 
+//yet it is mentioned as prop because the Buttons function needs it.
+//This is prop drilling, and makes the code not very readable.
+
+function Count({count , setCount}){
+  return <div>
+    <CountRenderer count={count} />
+    <Buttons count={count} setCount={setCount} />
+  </div>
 }
+function CountRenderer({count}){
+  return <div>
+    {count}
+  </div>
+}
+
+function Buttons({count,setCount}){
+  return <div>
+    <button onClick={()=>{
+      setCount(count + 1)
+    }}>Increase</button>
+
+    <button onClick={()=>{
+      setCount(count - 1)
+    }}>Decrease
+    </button>
+  </div>
+}
+
 
 export default App;
