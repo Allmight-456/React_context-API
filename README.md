@@ -1,3 +1,8 @@
+## Refer the other main branch for COntext API implementation
+
+## This branch has code to understand how prop drilling works and the redundancy and difficulty in reading code
+
+
 # React + Vite
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
