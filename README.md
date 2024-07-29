@@ -14,7 +14,7 @@ A simple React counter application that demonstrates the use of various React fe
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/your-username/counter-app.git
+   git clone https://github.com/Allmight-456/counter-app.git
 
 ## File Structure
 - App.jsx: Main component containing the counter logic and rendering.
